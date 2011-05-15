@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
     calc = createCalc();
     if (proccessInput(calc, content)) {
         temp_double = pop(calc->output);
-        printf("Result: %f\n", *temp_double);
+        printf("%f\n", *temp_double);
         free(temp_double);
     }
     free(content);
