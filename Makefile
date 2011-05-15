@@ -1,4 +1,4 @@
-clear:
+clean:
 	rm calc.exe
 
 build:
