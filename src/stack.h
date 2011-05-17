@@ -21,5 +21,5 @@ Stack* createStack();
 void deleteStack(Stack* stack);
 void push(Stack* stack, void* data);
 void* pop(Stack* stack);
-bool hasItems(Stack* stack);
+bool hasItems(const Stack* stack);
 #endif

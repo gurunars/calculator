@@ -22,7 +22,7 @@ void deleteCalc(Calc* calc) {
 }
 
 
-CharType type(char c) {
+CharType type(const char c) {
     if (isdigit(c)) {
         return DIGIT;
     } else if (c == '.') {
@@ -43,7 +43,7 @@ CharType type(char c) {
 
 
 #ifdef DEBUG
-void debug(char* format, ...) {
+void debug(const char* format, ...) {
     va_list argp;
     va_start(argp, format);
     printf("Debug: ");
@@ -52,7 +52,7 @@ void debug(char* format, ...) {
 }
 
 
-void showCalc(Calc* calc) {
+void showCalc(const Calc* calc) {
 
     Node* node;
 
@@ -76,7 +76,7 @@ void showCalc(Calc* calc) {
 #endif
 
 
-void error(char* format, ...) {
+void error(const char* format, ...) {
     va_list argp;
     va_start(argp, format);
     printf("Error: ");
@@ -85,7 +85,7 @@ void error(char* format, ...) {
 }
 
 
-int precedence(char sign) {
+int precedence(const char sign) {
     switch(sign) {
         case '(':
             return -1;
@@ -105,7 +105,7 @@ int precedence(char sign) {
 }
 
 
-bool doCalculation(Calc* calc, char sign) {
+bool doCalculation(Calc* calc, const char sign) {
 
     double* temp_double = (double*) pop(calc->output);
     double* temp_double2 = (double*) pop(calc->output);
@@ -146,7 +146,7 @@ bool doCalculation(Calc* calc, char sign) {
 }
 
 
-bool proccessInput(Calc* calc, char* string) {
+bool proccessInput(Calc* calc, const char* string) {
 
     int i, j;
     char c, prev_c;

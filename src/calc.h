@@ -16,15 +16,15 @@ typedef struct calc {
 
 Calc* createCalc();
 void deleteCalc(Calc* calc);
-CharType type(char c);
+CharType type(const char c);
 #ifdef DEBUG
-void debug(char* format, ...);
-void showCalc(Calc* calc);
+void debug(const char* format, ...);
+void showCalc(const Calc* calc);
 #endif
-void error(char* format, ...);
-int precedence(char sign);
-bool doCalculation(Calc* calc, char sign);
-bool proccessInput(Calc* calc, char* string);
+void error(const char* format, ...);
+int precedence(const char sign);
+bool doCalculation(Calc* calc, const char sign);
+bool proccessInput(Calc* calc, const char* string);
 
 #endif
 

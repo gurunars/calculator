@@ -21,7 +21,7 @@ void deleteStack(Stack* stack) {
     free(stack);
 }
 
-bool hasItems(Stack* stack) {
+bool hasItems(const Stack* stack) {
     return stack->length;
 }
 
