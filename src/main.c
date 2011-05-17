@@ -28,10 +28,11 @@ void showHelp() {
 int main(int argc, char *argv[]){
 
     FILE* fp;
-    int chars_in_file;
+    int n_chars;
     char* content;
     double* temp_double;
     Calc* calc;
+    InputType input_t = inputType(argv[1]);
 
     if (argc < 3) {
         printf("No args specified.\n");
@@ -39,25 +40,30 @@ int main(int argc, char *argv[]){
         exit(1);
     }
 
-    switch(inputType(argv[1])) {
+    switch(input_t) {
         case file:
             if((fp = fopen(argv[2], "r"))==NULL) {
                 printf("Cannot open file.\n");
                 exit(1);
             }
             fseek(fp, 0, SEEK_END);
-            chars_in_file = ftell(fp);
+            n_chars = ftell(fp);
             fseek(fp, 0, SEEK_SET);
 #ifdef DEBUG
-            printf("Chars in file: %d\n", chars_in_file);
+            printf("Chars in file: %d\n", n_chars);
 #endif
-            content = malloc(sizeof(char)*(chars_in_file+1));
-            fread(content, chars_in_file, 1, fp);
-            content[chars_in_file] = EOF;
+            content = malloc(sizeof(char)*(n_chars+1));
+            fread(content, n_chars, 1, fp);
+            content[n_chars] = EOF;
             fclose(fp);
             break;
         case console_input:
-            content = argv[2];
+            n_chars = strlen(argv[2]);
+#ifdef DEBUG
+            printf("Input: [%s]\n", content);
+            printf("Chars in input: %d\n", n_chars);
+#endif
+            strcpy(content, argv[2]);
             break;
         case unknown:
             printf("Unknown option.\n");
@@ -71,7 +77,9 @@ int main(int argc, char *argv[]){
         printf("%f\n", *temp_double);
         free(temp_double);
     }
-    free(content);
+    if (input_t == file) {
+        free(content);
+    }
     deleteCalc(calc);
 
 }

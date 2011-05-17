@@ -157,6 +157,9 @@ bool proccessInput(Calc* calc, char* string) {
     CharType prev_t = NONE;
 
     for(i=0; (c=string[i])!=EOF; i++) {
+        if (c == '\0') {
+            break;
+        }
         switch(type(c)) {
 
             case DIGIT:
