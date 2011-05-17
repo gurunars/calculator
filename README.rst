@@ -24,7 +24,7 @@ Algorithm
     - pop the top operator from the operator-stack and write it to output.
     - If (the top of the operator-stack is a '(' ), then a parentheses-balancing error has occurred. Complain bitterly.
 
-4.Close the input and the output.
+4. Close the input and the output.
 
 Operator Precedence Levels
 --------------------------
@@ -41,8 +41,18 @@ precedence  operator    (typical operation)
 ?           )           end-grouping (no precedence)
 ==========  ========    ==================================
 
+Usage
+-----
+
+1. Keep digits in a file and perform calculations
+   ``calc.exe -f FILE_NAME``
+2. Pass digits as input in terminal
+   ``calc.exe -i "PATTERN"``
+
 Compilation instructions
 ------------------------
 
-Use ``gcc -lm *.c -o calc.exe`` to compile the sources.
-Use ``valgrind --tool=memcheck calc.exe test.txt`` to check memory leaks.
+Use ``make build`` to compile the sources.
+Use ``make debug`` to compile the sources in a debug mode.
+Use ``make test`` and ``./test.exe`` to run unittests.
+Use ``valgrind --tool=memcheck calc.exe ...`` to check memory leaks.
