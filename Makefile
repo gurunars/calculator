@@ -1,12 +1,12 @@
 clean:
-	rm calc.exe
-	rm test.exe
+	rm calc
+	rm test
 
 build:
 	gcc -o calc src/*.c -lm
 
 test:
-	gcc -lm test.c src/stack.c src/calc.c -o test.exe
+	gcc -o test test.c src/stack.c src/calc.c -lm
 
 debug:
 	gcc -o calc src/*.c -lm -DDEBUG
