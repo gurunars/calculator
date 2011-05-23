@@ -1,12 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "common.h"
 #include "calc.h"
 
-//#define DEBUG
-
 typedef enum {file, console_input, unknown} InputType;
-
 
 InputType inputType(char* argument) {
     if (strcmp(argument, "-f") == 0) {
@@ -18,12 +16,10 @@ InputType inputType(char* argument) {
     }
 }
 
-
 void showHelp() {
     printf("Use '-f' option to fetch input from file or '-i' to fetch it from"
            " console directly.\n");
 }
-
 
 int main(int argc, char *argv[]){
 
@@ -52,7 +48,7 @@ int main(int argc, char *argv[]){
 #ifdef DEBUG
             printf("Chars in file: %d\n", n_chars);
 #endif
-            content = malloc(sizeof(char)*(n_chars+1));
+            content = xmalloc(sizeof(char)*(n_chars+1));
             fread(content, n_chars, 1, fp);
             content[n_chars] = EOF;
             fclose(fp);

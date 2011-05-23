@@ -2,25 +2,21 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <math.h>
+#include "common.h"
 #include "calc.h"
 
-//#define DEBUG
-
-
 Calc* createCalc() {
-    Calc* tempo = malloc(sizeof(Calc));
+    Calc* tempo = xmalloc(sizeof(Calc));
     tempo->output = createStack();
     tempo->stack = createStack();
     return tempo;
 }
-
 
 void deleteCalc(Calc* calc) {
     deleteStack(calc->output);
     deleteStack(calc->stack);
     free(calc);
 }
-
 
 CharType type(const char c) {
     if (isdigit(c)) {
@@ -41,7 +37,6 @@ CharType type(const char c) {
     }
 }
 
-
 #ifdef DEBUG
 void debug(const char* format, ...) {
     va_list argp;
@@ -50,7 +45,6 @@ void debug(const char* format, ...) {
     vprintf(format, argp);
     printf("\n");
 }
-
 
 void showCalc(const Calc* calc) {
 
@@ -75,7 +69,6 @@ void showCalc(const Calc* calc) {
 }
 #endif
 
-
 void error(const char* format, ...) {
     va_list argp;
     va_start(argp, format);
@@ -83,7 +76,6 @@ void error(const char* format, ...) {
     vprintf(format, argp);
     printf("\n");
 }
-
 
 int precedence(const char sign) {
     switch(sign) {
@@ -103,7 +95,6 @@ int precedence(const char sign) {
             return 9;
     }
 }
-
 
 bool doCalculation(Calc* calc, const char sign) {
 
@@ -145,7 +136,6 @@ bool doCalculation(Calc* calc, const char sign) {
     }
 }
 
-
 bool proccessInput(Calc* calc, const char* string) {
 
     int i, j;
@@ -171,7 +161,7 @@ bool proccessInput(Calc* calc, const char* string) {
                     error("digit %c in illegal place @ %d", c, i);
                     return false;
                 }
-                buff = malloc(sizeof(char)*20); // #1
+                buff = xmalloc(sizeof(char)*20); // #1
                 dot_used = false;
                 buff[0] = c;
                 j = 1;
@@ -204,7 +194,7 @@ bool proccessInput(Calc* calc, const char* string) {
 #ifdef DEBUG
                         debug("double: [%f]", atof(buff));
 #endif
-                        temp_double = malloc(sizeof(double));
+                        temp_double = xmalloc(sizeof(double));
                         *temp_double = atof(buff);
                         push(calc->output, temp_double);
 #ifdef DEBUG
@@ -240,7 +230,7 @@ bool proccessInput(Calc* calc, const char* string) {
                         break;
                     }
                 }
-                buff = malloc(sizeof(char));
+                buff = xmalloc(sizeof(char));
                 *buff = c;
                 push(calc->stack, buff);
 #ifdef DEBUG
@@ -263,7 +253,7 @@ bool proccessInput(Calc* calc, const char* string) {
                     error("open bracket in illegal place @ %d", i);
                     return false;
                 }
-                buff = malloc(sizeof(char));
+                buff = xmalloc(sizeof(char));
                 *buff = c;
                 push(calc->stack, buff);
                 prev_t = OPEN_BRACKET;

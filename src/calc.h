@@ -1,7 +1,10 @@
 #ifndef CALC_G
 #define CALC_G
 
+
+#include "common.h"
 #include "stack.h"
+
 
 typedef enum {
     NONE, DOT, OPEN_BRACKET, CLOSE_BRACKET, SIGN, IGNORE, DIGIT, UNEXPECTED_CHAR
@@ -25,6 +28,7 @@ void error(const char* format, ...);
 int precedence(const char sign);
 bool doCalculation(Calc* calc, const char sign);
 bool proccessInput(Calc* calc, const char* string);
+
 
 #endif
 

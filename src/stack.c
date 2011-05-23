@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "common.h"
 #include "stack.h"
 
 Stack* createStack(){
-    Stack* tempo = malloc(sizeof(Stack));
+    Stack* tempo = xmalloc(sizeof(Stack));
     tempo->top = NULL;
     tempo->bottom = NULL;
     tempo->length = 0;
@@ -27,7 +28,7 @@ bool hasItems(const Stack* stack) {
 
 void push(Stack* stack, void* data) {
     Node* node = stack->top;
-    Node* new_node = malloc(sizeof(Node));
+    Node* new_node = xmalloc(sizeof(Node));
     new_node->data = data;
     new_node->next = new_node->previous = NULL;
     if (!node) {
