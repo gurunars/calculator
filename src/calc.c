@@ -4,6 +4,8 @@
 #include <math.h>
 #include "common.h"
 #include "calc.h"
+#define MAX_DIGIT_SIZE 20
+
 
 Calc* createCalc() {
     Calc* tempo = xmalloc(sizeof(Calc));
@@ -161,16 +163,21 @@ bool proccessInput(Calc* calc, const char* string) {
                     error("digit %c in illegal place @ %d", c, i);
                     return false;
                 }
-                buff = xmalloc(sizeof(char)*20); // #1
+                buff = xmalloc(sizeof(char)*MAX_DIGIT_SIZE);
                 dot_used = false;
                 buff[0] = c;
                 j = 1;
                 while (1) {
                     c = string[i+j];
+                    if (j >= MAX_DIGIT_SIZE) {
+                        error("max digit size of %d symbols exceeded @ %d",
+                              MAX_DIGIT_SIZE, i+j);
+                        return false;
+                    }
                     t = type(c);
                     if (t == DIGIT || t == DOT) {
                         if (t == DOT && dot_used) {
-                            error("another dot in a digit @ %d\n", i+j);
+                            error("another dot in a digit @ %d", i+j);
                             return false;
                         } else if (t == DOT && !dot_used) {
 #ifdef DEBUG
