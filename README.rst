@@ -55,4 +55,4 @@ Compilation instructions
 Use ``make build`` to compile the sources.
 Use ``make debug`` to compile the sources in a debug mode.
 Use ``make test`` and ``./test.exe`` to run unittests.
-Use ``valgrind --tool=memcheck calc.exe ...`` to check memory leaks.
+Use ``valgrind --tool=memcheck ...`` to check memory leaks.
