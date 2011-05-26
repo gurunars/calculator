@@ -55,11 +55,12 @@ int main(int argc, char *argv[]){
             break;
         case console_input:
             n_chars = strlen(argv[2]);
+            content = xmalloc(sizeof(char)*(n_chars+1));
+            strcpy(content, argv[2]);
 #ifdef DEBUG
             printf("Input: [%s]\n", content);
             printf("Chars in input: %d\n", n_chars);
 #endif
-            strcpy(content, argv[2]);
             break;
         case unknown:
             printf("Unknown option.\n");
@@ -73,9 +74,7 @@ int main(int argc, char *argv[]){
         printf("%f\n", *temp_double);
         free(temp_double);
     }
-    if (input_t == file) {
-        free(content);
-    }
+    free(content);
     deleteCalc(calc);
 
 }
