@@ -28,14 +28,15 @@ int main(int argc, char *argv[]){
     char* content;
     double* temp_double;
     Calc* calc;
-    InputType input_t = inputType(argv[1]);
-
+    
     if (argc < 3) {
         printf("No args specified.\n");
         showHelp();
         exit(1);
     }
 
+    InputType input_t = inputType(argv[1]);
+    
     switch(input_t) {
         case file:
             if((fp = fopen(argv[2], "r"))==NULL) {
